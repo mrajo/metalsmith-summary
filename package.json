@@ -1,0 +1,23 @@
+{
+  "name": "metalsmith-summary",
+  "version": "1.0.0",
+  "description": "A Metalsmith plugin to output total files processed and execution time when finished.",
+  "main": "src/index.js",
+  "repository": "mrajo/metalsmith-summary",
+  "author": {
+    "name": "mrajo",
+    "email": "anthony.c@stle.co"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "metrics-timer": "^0.1.0"
+  },
+  "devDependencies": {
+    "metalsmith": "^1.7.0",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.1"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
