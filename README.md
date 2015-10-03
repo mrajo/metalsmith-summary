@@ -1,4 +1,4 @@
-# metalsmith-summary
+# metalsmith-summary [![Build Status](https://travis-ci.org/mrajo/metalsmith-summary.svg)](https://travis-ci.org/mrajo/metalsmith-summary)
 
 > A Metalsmith plugin to output total files processed and execution time when finished
 
@@ -19,7 +19,7 @@ Metalsmith(__dirname)
   .build();
 ```
 
-This will output a message like this:
+This will print a message to console like so:
 
 `42 files were processed in 3.14 seconds.`
 
