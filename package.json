@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-summary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Metalsmith plugin to output total files processed and execution time when finished.",
   "main": "src/index.js",
   "repository": "mrajo/metalsmith-summary",

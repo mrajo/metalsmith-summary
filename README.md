@@ -7,6 +7,7 @@ This plugin prints a quick message before the build action to show the number of
 ## Usage
 
 This module exports two functions: `init` and `print`. `init` should be the first plugin used by Metalsmith to initialize the timer. `print` should be the last plugin used before the `build` action.
+By default, `print` uses `console.log`, but this can overridden by passing in a function that accepts a single string argument.
 
 ```js
 var Metalsmith = require('metalsmith');
@@ -16,10 +17,12 @@ Metalsmith(__dirname)
   .use(summary.init())
   // other plugins
   .use(summary.print())
+  // or
+  .use(summary.print(otherPrintFn))
   .build();
 ```
 
-This will print a message to console like so:
+This will print a message to console with `console.log` or the supplied function like so:
 
 `42 files were processed in 3.14 seconds.`
 
