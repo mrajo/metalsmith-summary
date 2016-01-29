@@ -1,19 +1,35 @@
 'use strict';
 
 var timer = require('metrics-timer');
+var sprintf = require('sprintf-js').sprintf;
 var pkg_name = require('../package.json').name;
 
 var metrics = module.exports = {};
 
-metrics.print = function (printfn) {
+metrics.print = function (template, printfn) {
     return function (files, metalsmith, done) {
-      var ms = timer.stop(pkg_name);
-      var text = Object.keys(files).length + ' files processed in ' + (ms / 1000).toFixed(2) + ' seconds.';
-      if (typeof printfn == 'function') {
-        printfn.call(null, text);
+      var data = {
+        count: Object.keys(files).length,
+        time: (timer.stop(pkg_name) / 1000).toFixed(2)
+      };
+
+      var text;
+      if (typeof template == 'string') {
+        template = template.replace(/\$\{([a-zA-Z]+)\}/g, '%\($1\)d');
+        text = sprintf(template, data);
       } else {
-        console.log(text);
+        text = sprintf('%(count)d files processed in %(time)d seconds.', data);
       }
+
+      if (typeof template == 'function') {
+        printfn = template;
+      }
+
+      if (typeof printfn != 'function' && typeof template != 'function') {
+        printfn = console.log;
+      }
+
+      printfn.call(null, text);
       done();
     };
 };

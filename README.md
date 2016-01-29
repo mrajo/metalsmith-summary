@@ -6,7 +6,10 @@ This plugin prints a quick message before the build action to show the number of
 
 ## Usage
 
-This module exports two functions: `init` and `print`. `init` should be the first plugin used by Metalsmith to initialize the timer. `print` should be the last plugin used before the `build` action.
+This module exports two functions: `init` and `print`. `init` should be the first plugin used by Metalsmith to initialize the timer. `print` should be the last plugin used before the `build` action. `print` accepts two optional arguments (`template`, `printfn`). Either one can be omitted but must be in this order when both defined.
+
+`template` overrides the default output string. Use placeholders in the string to replace them with data from Metalsmith. `${files}` is replaced with file count and `${time}` is replaced with number of seconds to execute Metalsmith build.
+
 By default, `print` uses `console.log`, but this can overridden by passing in a function that accepts a single string argument.
 
 ```js
@@ -18,7 +21,11 @@ Metalsmith(__dirname)
   // other plugins
   .use(summary.print())
   // or
+  .use(summary.print('There are ${files}. It took ${time} seconds.'))
+  // or
   .use(summary.print(otherPrintFn))
+  // or
+  .use(summary.print('There are ${files}. It took ${time} seconds.', otherPrintFn))
   .build();
 ```
 
